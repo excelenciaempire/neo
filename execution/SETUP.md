@@ -74,8 +74,39 @@ Añade su MCP (edita `../.mcp.json`), apuntando `--server` a la IP/puerto donde 
 ```
 Mantén `alwaysAllow: []` para exigir confirmación en cada ejecución autónoma.
 
+## Notas de esta instalación en Windows (gotchas ya resueltos)
+
+Al montar esto en Windows 11 aparecieron 2 problemas; si **re-clonas** kali-mcp, aplícalos
+antes de `./init.sh`:
+
+1. **`entrypoint.sh` con finales de línea CRLF** → el contenedor entra en crash-loop con
+   `exec /entrypoint.sh: no such file or directory` (Linux interpreta el shebang como
+   `/bin/bash\r`). Arréglalo a LF:
+   ```bash
+   sed -i 's/\r$//' resources/kali-mcp/docker/entrypoint.sh
+   ```
+   (Recomendado además: `git config --global core.autocrlf input` para no reintroducirlo.)
+
+2. **`searchsploit -u` descarga `exploitdb-papers` (~2.5 GB)** desde un mirror lento y cuelga
+   el build. Ya se editó `docker/Dockerfile` para quitarlo (searchsploit sigue funcionando con
+   el paquete `exploitdb`). Si re-clonas, elimina `searchsploit -u ||true &&` de esa línea `RUN`.
+
+## Cargar las tools MCP en Claude Code
+
+El MCP `kali` se detecta al **arrancar** Claude Code. Si abriste Claude Code en `Neo/` **antes**
+de que el contenedor estuviera arriba, **reinicia Claude Code** (o `/mcp`) para que cargue las
+tools `mcp__kali__*` (nmap_scan, sqlmap_scan, etc.). Verifica el servidor con:
+```bash
+curl -s -o /dev/null -w "%{http_code}\n" http://localhost:666/mcp   # 405 = vivo (espera POST)
+```
+
+## Verificación realizada (referencia)
+- Contenedor `kali-mcp` `Up (healthy)`, MCP `kali_mcp v1.22.0`, tools expuestas OK.
+- Scan real autorizado: `nmap -Pn -sV --top-ports 50 scanme.nmap.org` → 1 host up, puertos
+  detectados en ~192 s. `scanme.nmap.org` es el objetivo que el proyecto Nmap ofrece para pruebas.
+
 ## Troubleshooting (kali-mcp)
-- `init.sh` colgado en "Waiting for MCP server" → `docker ps`, `docker logs kali-mcp`.
+- `init.sh` colgado en "Waiting for MCP server" → `docker ps`, `docker logs kali-mcp` (revisa CRLF).
 - Puerto 666 ocupado → cambia el mapeo en `docker/compose.yml` y en `../.mcp.json`.
 - Build falla → reintenta (repos de Kali a veces caídos), verifica salida a Internet.
 
