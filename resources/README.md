@@ -51,3 +51,9 @@ Para levantar el backend de ejecución (Docker + kali-mcp), ver [`../execution/S
   (no MCP/API/CLI): Neo no puede invocarlas y solapan con `web-exploit`. BURP-AI además exfiltra
   tráfico a un LLM de terceros y está poco mantenido. Se **integra solo** `six2dez/burp-ai-agent`
   (tiene MCP) — ver `knowledge/tools/burp-ai-agent.md`.
+
+## Documentada, no instalada
+
+- `usestrix/strix` — pentester autónomo de IA (par de Neo). Lanza sus **propios** contenedores Docker
+  y necesita **Python en el host + API key de LLM** → no encaja en kali-mcp. Queda **documentada**
+  en `knowledge/tools/strix.md` (install + config OpenRouter + uso); se activa cuando se instale.

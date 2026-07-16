@@ -17,6 +17,7 @@
 /resources/burp-ai-agent/
 /resources/burpai/
 /resources/BURP-AI/
+/resources/strix/
 
 # --- Datos de VulnForce (informes = sensibles, NUNCA versionar) ---
 /execution/vulnforce-data/
