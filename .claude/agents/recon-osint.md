@@ -84,7 +84,11 @@ para el informe.
   python3 /opt/image-recon/image_recon.py meta   <img>            # EXIF/GPS + pHash (maps_url si hay GPS)
   python3 /opt/image-recon/image_recon.py search <url-img>        # URLs de busqueda inversa (Yandex/TinEye/Lens/Bing)
   python3 /opt/image-recon/image_recon.py index  <dir> -o idx.json  # indexa corpus PROPIO/autorizado
-  python3 /opt/image-recon/image_recon.py match  <img> idx.json    # casi-duplicados en tu corpus
+  python3 /opt/image-recon/image_recon.py match  <img> idx.json    # casi-duplicados en tu corpus (pHash)
+  # semantico (CLIP+FAISS, usa el venv):
+  /opt/image-recon-venv/bin/python /opt/image-recon/image_recon.py cindex  <dir> -o /tmp/clip
+  /opt/image-recon-venv/bin/python /opt/image-recon/image_recon.py csearch <img> /tmp/clip          # imagen->imagen
+  /opt/image-recon-venv/bin/python /opt/image-recon/image_recon.py csearch "a red jacket" /tmp/clip --text
   ```
   Las URLs de `search` se abren con `browser-harness`. **No** hace reconocimiento facial contra
   internet; el matching es solo contra tu corpus. Referencia de API de pago: `knowledge/osint/reverse-image-search-lenso.md`.

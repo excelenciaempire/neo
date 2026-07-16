@@ -14,6 +14,9 @@
 /resources/infoooze/
 /resources/theHarvester/
 /resources/Mr.Holmes/
+/resources/burp-ai-agent/
+/resources/burpai/
+/resources/BURP-AI/
 
 # --- Datos de VulnForce (informes = sensibles, NUNCA versionar) ---
 /execution/vulnforce-data/
