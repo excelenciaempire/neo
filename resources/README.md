@@ -47,3 +47,7 @@ Para levantar el backend de ejecución (Docker + kali-mcp), ver [`../execution/S
 - `devxprite/infoooze` — ~95-100% duplicado (sherlock/maigret/holehe/nmap/exiftool) + claves API muertas hardcodeadas.
 - `Lucksi/Mr.Holmes` — redundante + mal encaje técnico (TUI interactiva no scriptable, root, PHP/Tor/GUI). Solo referencia.
 - `lenso-ai/reverse-image-search-api` — SaaS de pago sin código self-hostable; **destilado** a `knowledge/osint/reverse-image-search-lenso.md`.
+- `srinivasans13/burpai` y `th30d4y/BURP-AI` — extensiones GUI de Burp **sin interfaz programática**
+  (no MCP/API/CLI): Neo no puede invocarlas y solapan con `web-exploit`. BURP-AI además exfiltra
+  tráfico a un LLM de terceros y está poco mantenido. Se **integra solo** `six2dez/burp-ai-agent`
+  (tiene MCP) — ver `knowledge/tools/burp-ai-agent.md`.
