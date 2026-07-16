@@ -9,7 +9,9 @@ uno mantiene su propia licencia y autoría.
 | `WSTG-Scan/` | https://github.com/afsh4ck/WSTG-Scan | Scanner web OWASP WSTG + API Top 10 (Python) | MIT |
 | `awesome-shodan-queries/` | https://github.com/jakejarvis/awesome-shodan-queries | Catálogo de dorks de Shodan (OSINT) — vendorizado en `knowledge/osint/shodan-queries.md` | MIT |
 | `kali-mcp/` | https://github.com/pabpereza/kali-mcp | Backend de EJECUCIÓN: MCP + contenedor Kali con 50+ herramientas | Ver repo |
-| `hexstrike-ai/` | https://github.com/0x4m4/hexstrike-ai | Backend de ejecución avanzado (150+ tools, Python) — opcional | Ver repo |
+| `hexstrike-ai/` | https://github.com/0x4m4/hexstrike-ai | Backend de ejecución avanzado (150+ tools, Python) | Ver repo |
+| `VulnForce/` | https://github.com/afsh4ck/VulnForce | **Motor de informes** (web-app Next.js + MCP nativo); 3er servicio Docker `:47474` | Ver repo |
+| `raptor/` | https://github.com/gadievron/raptor | **SAST + SCA/SBOM** (capa Python instalada en el contenedor kali-mcp) | Ver repo |
 
 ## Re-clonar
 
@@ -30,8 +32,9 @@ git clone --depth 1 https://github.com/0x4m4/hexstrike-ai.git
 
 Para levantar el backend de ejecución (Docker + kali-mcp), ver [`../execution/SETUP.md`](../execution/SETUP.md).
 
-## Excluido
+## Excluido (ver [`../AUTHORIZATION.md`](../AUTHORIZATION.md))
 
-`elder-plinius/G0DM0D3` **no** se incluye: es una colección de *jailbreaks* de LLMs (evasión de
-salvaguardas de IA), no una herramienta de seguridad ofensiva. Queda fuera del propósito ético
-de esta suite (ver [`../AUTHORIZATION.md`](../AUTHORIZATION.md)).
+- `elder-plinius/G0DM0D3` — *jailbreaks* de LLMs (evasión de salvaguardas de IA), no es tooling de seguridad.
+- `afsh4ck/FBrute` — fuerza bruta de **cuentas de Facebook** de terceros; sin autorización posible.
+- `afsh4ck/WifiPwn` — incluye un **phishing-kit** ("Evil Portal" que clona logins de Google/Facebook/etc.);
+  su núcleo WiFi legítimo ya está en `kali-mcp`. Se mantiene sin ejecutar, no se referencia en subagentes.

@@ -62,6 +62,15 @@ host, tecnologías/CMS, superficie expuesta (Shodan), correos/usuarios, y **posi
 priorizados para las siguientes fases (web-exploit / network-ad). Registra cada consulta/comando
 para el informe.
 
+## SCA / supply-chain — raptor
+Para auditar las **dependencias** de un proyecto **autorizado** (SBOM + CVEs de dependencias), usa
+**raptor** en el contenedor `kali-mcp` vía la tool MCP `execute_command`:
+```
+python3 /opt/raptor/raptor.py sca --repo <ruta-proyecto>
+```
+Genera SBOM y cruza las versiones resueltas con CVEs conocidos (PEP 440 / rangos). Solo sobre código
+propio o con permiso escrito.
+
 ## Reglas
 - Distingue siempre pasivo vs activo; para lo activo exige objetivo autorizado.
 - No hagas de-anonimización ni acoso de personas; OSINT de personas solo con fin de engagement

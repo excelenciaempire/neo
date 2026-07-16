@@ -77,6 +77,39 @@ demanda** (`docker exec -i kali-mcp ... hexstrike_mcp.py`). No hace falta arranc
 > El MCP `hexstrike` requiere `docker` en el PATH del sistema (Docker Desktop lo añade tras
 > instalar) y el contenedor `kali-mcp` corriendo.
 
+## 6. VulnForce — motor de informes (servicio Docker + MCP)
+
+Web-app de reporting de pentest con **MCP nativo**. Corre como **3er servicio** del stack (junto a
+kali-mcp:666 y hexstrike:8888). Build + run en Windows/Docker:
+```bash
+docker build -t vulnforce:latest resources/VulnForce
+docker run -d --name vulnforce --restart unless-stopped --user 0 -p 47474:3000 \
+  -v "C:/Users/river/Desktop/Neo/execution/vulnforce-data:/app/data" vulnforce:latest
+```
+- **UI**: http://localhost:47474 · **MCP**: `http://localhost:47474/api/mcp` (ya en
+  [`../.mcp.json`](../.mcp.json) como server `vulnforce`).
+- Verificar: `curl -s -o /dev/null -w "%{http_code}" http://localhost:47474/` → **200**;
+  el MCP responde a `initialize` (serverInfo `vulnforce`).
+- Datos en `execution/vulnforce-data/` (**gitignored** — informes = sensibles). Expón solo en localhost/VPN.
+- Tools MCP: `list_projects`, `create_report`, `create_finding` (severidad+CVSS), `append_to_report`
+  (marcador `{{findings.table}}`), `list_findings`… El subagente `reporting` las usa; export a PDF/HTML/MD desde la UI.
+
+## 7. raptor — SAST / SCA dentro de kali-mcp
+
+Instala (idempotente) la **capa Python headless** de raptor en el contenedor kali-mcp:
+```bash
+docker exec kali-mcp bash -lc 'git clone --depth 1 https://github.com/gadievron/raptor.git /opt/raptor; \
+  cd /opt/raptor && pip3 install --break-system-packages --root-user-action=ignore -r requirements.txt && \
+  pip3 install --break-system-packages --root-user-action=ignore semgrep'
+```
+Uso vía la tool MCP `execute_command` (**solo código propio/autorizado**; los PoCs no se versionan):
+```
+python3 /opt/raptor/raptor.py scan --repo <ruta> --policy-groups owasp,secrets   # SAST (Semgrep) -> SARIF/JSON
+python3 /opt/raptor/raptor.py sca  --repo <ruta>                                  # SCA / SBOM + CVEs de dependencias
+```
+Los modos `analyze`/`validate` (validación de explotabilidad con LLM) requieren API key. **No** se
+integra la capa de orquestación Claude Code de raptor (sería redundante con Neo).
+
 ## Notas de esta instalación en Windows (gotchas ya resueltos)
 
 Al montar esto en Windows 11 aparecieron 2 problemas; si **re-clonas** kali-mcp, aplícalos

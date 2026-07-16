@@ -3,6 +3,14 @@
 /resources/awesome-shodan-queries/
 /resources/kali-mcp/
 /resources/hexstrike-ai/
+/resources/VulnForce/
+/resources/WifiPwn/
+/resources/osint-ui/
+/resources/FBrute/
+/resources/raptor/
+
+# --- Datos de VulnForce (informes = sensibles, NUNCA versionar) ---
+/execution/vulnforce-data/
 
 # --- Secretos / credenciales (NUNCA subir) ---
 .env

@@ -26,6 +26,8 @@ la *Ethical Hacking Cheatsheet* de afsh4ck — 767 páginas), **OSINT en vivo** 
   hydra, responder, smbclient.
 - **cloud / contenedores** (vía HexStrike) — prowler, trivy, scout-suite, kube-hunter/bench,
   checkov, terrascan.
+- **código (SAST/SCA)** — raptor: análisis estático (Semgrep) + dependencias/SBOM sobre código autorizado.
+- **informes** — VulnForce (servicio + MCP): proyectos, hallazgos con CVSS, export PDF/HTML/MD.
 - **soporte** — generación de payloads, cracking (john/hashcat), forense (binwalk/steghide/exiftool).
 
 Pídele cosas como: *"pentest completo a esta máquina de mi lab"*, *"audita esta web mía por OWASP

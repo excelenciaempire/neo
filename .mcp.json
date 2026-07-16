@@ -4,6 +4,11 @@
       "type": "http",
       "url": "http://localhost:666/mcp"
     },
+    "vulnforce": {
+      "type": "http",
+      "url": "http://localhost:47474/api/mcp",
+      "description": "VulnForce: motor de informes de pentest (proyectos, hallazgos con severidad/CVSS, export PDF/HTML/MD). Requiere el contenedor 'vulnforce' corriendo (ver execution/SETUP.md)."
+    },
     "hexstrike": {
       "command": "docker",
       "args": [

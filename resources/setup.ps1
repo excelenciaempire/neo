@@ -8,8 +8,12 @@ $repos = @(
   'https://github.com/afsh4ck/WSTG-Scan.git',
   'https://github.com/jakejarvis/awesome-shodan-queries.git',
   'https://github.com/pabpereza/kali-mcp.git',
-  'https://github.com/0x4m4/hexstrike-ai.git'
+  'https://github.com/0x4m4/hexstrike-ai.git',
+  'https://github.com/afsh4ck/VulnForce.git',   # motor de informes (servicio + MCP)
+  'https://github.com/gadievron/raptor.git'     # SAST/SCA (capa Python en kali-mcp)
 )
+# NOTA: afsh4ck/WifiPwn y afsh4ck/FBrute quedan EXCLUIDOS a proposito (ver ../AUTHORIZATION.md):
+#   WifiPwn incluye un phishing-kit (Evil Portal) y FBrute es brute-force de cuentas de Facebook.
 
 foreach ($r in $repos) {
   $name = [System.IO.Path]::GetFileNameWithoutExtension($r)

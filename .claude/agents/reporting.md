@@ -47,6 +47,18 @@ una versión **HTML** autocontenida. Deduplica hallazgos repetidos entre fases. 
 reales recogidas por recon-osint / web-exploit / network-ad — **no inventes hallazgos ni
 resultados**. Si falta evidencia para un hallazgo, márcalo como "a confirmar".
 
+## Motor de informes: VulnForce (opcional, vía MCP)
+Si el servicio **VulnForce** está levantado (ver `execution/SETUP.md`), usa su MCP `vulnforce`
+(`http://localhost:47474/api/mcp`) para construir el entregable **programáticamente** y exportarlo
+a PDF/HTML/MD, en vez de escribir todo el Markdown a mano:
+1. `list_projects` / `create_report` → localiza o crea proyecto + cliente.
+2. Por cada vulnerabilidad: `create_finding` con título, **severidad**, **CVSS**, activo/endpoint,
+   evidencia reproducible y remediación (cuerpo en Markdown).
+3. En el cuerpo del informe inserta el marcador `{{findings.table}}` → tabla automática de hallazgos.
+4. `list_findings` / `update_finding` para revisar; exporta a PDF/HTML/MD desde VulnForce.
+
+Si el MCP `vulnforce` **no** está disponible, usa la salida Markdown/HTML manual descrita arriba.
+
 ## Reglas
 - Tono profesional, orientado a remediación, sin exageración.
 - No incluyas secretos/credenciales en claro más allá de lo imprescindible como evidencia

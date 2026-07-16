@@ -41,9 +41,17 @@ confirmación explícita del usuario antes de ejecutarse, incluso en nivel *Full
 6. **Datos sensibles**: credenciales/hashes/datos de cliente se guardan solo lo necesario y
    **nunca** se suben al repositorio (ver `.gitignore`).
 
-## Fuera de alcance de esta suite
+## Fuera de alcance de esta suite (herramientas excluidas)
 
-Se excluye deliberadamente todo lo que no sea seguridad ofensiva legítima. En particular, se
-**excluyó** el repositorio `elder-plinius/G0DM0D3` (colección de *jailbreaks* de LLMs / evasión
-de salvaguardas de IA), por no ser tooling de pentesting y quedar fuera del propósito ético de
-esta suite.
+Se excluye deliberadamente todo lo que no sea seguridad ofensiva legítima. Herramientas
+analizadas y **excluidas a propósito**:
+
+| Herramienta | Motivo de exclusión |
+|---|---|
+| `elder-plinius/G0DM0D3` | Colección de *jailbreaks* de LLMs (evasión de salvaguardas de IA). No es tooling de pentesting. |
+| `afsh4ck/FBrute` | Fuerza bruta de **cuentas de Facebook** de terceros. No existe autorización legítima posible (viola ToS y leyes de acceso no autorizado). Cae en la prohibición de "ataque a cuentas de terceros". No se instala ni se documenta; su `pass.txt` no se distribuye. |
+| `afsh4ck/WifiPwn` | Su módulo **"Evil Portal"** clona los logins de Google/Facebook/Instagram/Microsoft para **robar credenciales reales** (phishing-kit). Además su núcleo WiFi legítimo (aircrack-ng/hashcat/deauth) ya está en `kali-mcp`. Se mantiene el clon solo como referencia, **sin ejecutar** y sin referenciar en subagentes. |
+
+> Para fuerza bruta **legítima** sobre servicios propios/lab usa `hydra`/`medusa`/`patator` (en
+> `kali-mcp`). Para metodología WiFi legítima (monitor → handshake → deauth en red propia → crack),
+> destila solo el flujo autorizado, **omitiendo** cualquier módulo de tipo evil-portal.
