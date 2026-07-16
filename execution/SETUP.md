@@ -53,26 +53,29 @@ nmap_scan  target=scanme.nmap.org  options="-sV -T4 --top-ports 100"
 ```
 Debe devolver puertos/servicios. A partir de aquí, los subagentes pueden usar las tools MCP.
 
-## 5. (Opcional) hexstrike-ai — backend avanzado (150+ tools)
-Requiere Python 3 y muchas herramientas Linux → **córrelo dentro del contenedor Kali** (o en
-una VM Kali con acceso a la red objetivo), no en el host Windows.
+## 5. hexstrike-ai — segundo backend (150+ tools) DENTRO del contenedor Kali
+
+hexstrike-ai corre **dentro del contenedor kali-mcp** (reutiliza sus herramientas y su Python),
+y su MCP se conecta vía `docker exec` — así **no necesitas Python en Windows**. Ya viene
+configurado en [`../.mcp.json`](../.mcp.json) como servidor MCP `hexstrike`.
+
+**Instalar/restaurar** (idempotente):
 ```bash
-# dentro de Kali:
-git clone https://github.com/0x4m4/hexstrike-ai.git && cd hexstrike-ai
-python3 -m venv hexstrike-env && source hexstrike-env/bin/activate
-pip3 install -r requirements.txt
-python3 hexstrike_server.py         # server en :8888
+bash execution/setup-hexstrike.sh   # copia hexstrike al contenedor + instala deps (flask, fastmcp, selenium, mitmproxy...)
 ```
-Añade su MCP (edita `../.mcp.json`), apuntando `--server` a la IP/puerto donde corra:
-```json
-"hexstrike-ai": {
-  "command": "python3",
-  "args": ["/ruta/hexstrike-ai/hexstrike_mcp.py", "--server", "http://127.0.0.1:8888"],
-  "timeout": 300,
-  "alwaysAllow": []
-}
-```
-Mantén `alwaysAllow: []` para exigir confirmación en cada ejecución autónoma.
+El script instala pip vía `get-pip.py` (esquiva mirrors de Kali) y solo las dependencias
+necesarias (se omiten `angr`/`pwntools`, pesados y de uso lazy).
+
+**Cómo se conecta**: el bridge `hexstrike` de `.mcp.json` arranca el server `:8888` **bajo
+demanda** (`docker exec -i kali-mcp ... hexstrike_mcp.py`). No hace falta arrancarlo a mano.
+
+> ⚠️ **NO uses `docker commit`** para persistir hexstrike: en esta imagen de ~15 GB corrompió
+> el snapshot de containerd y dejó el contenedor en crash-loop. hexstrike vive en la capa de
+> escritura del contenedor (sobrevive a reinicios); si **recreas** el contenedor (`init.sh`
+> rebuild / `docker rm`), vuelve a ejecutar `setup-hexstrike.sh`.
+
+> El MCP `hexstrike` requiere `docker` en el PATH del sistema (Docker Desktop lo añade tras
+> instalar) y el contenedor `kali-mcp` corriendo.
 
 ## Notas de esta instalación en Windows (gotchas ya resueltos)
 

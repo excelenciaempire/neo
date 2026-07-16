@@ -3,6 +3,15 @@
     "kali": {
       "type": "http",
       "url": "http://localhost:666/mcp"
+    },
+    "hexstrike": {
+      "command": "docker",
+      "args": [
+        "exec", "-i", "kali-mcp", "bash", "-lc",
+        "curl -sf http://localhost:8888/health >/dev/null 2>&1 || (cd /opt/hexstrike-ai && HEXSTRIKE_PORT=8888 setsid python3 hexstrike_server.py >/var/log/hexstrike.log 2>&1 &); for i in $(seq 1 40); do curl -sf http://localhost:8888/health >/dev/null 2>&1 && break; sleep 1; done; exec python3 /opt/hexstrike-ai/hexstrike_mcp.py --server http://localhost:8888"
+      ],
+      "timeout": 300,
+      "description": "HexStrike AI (150+ tools) dentro del contenedor kali-mcp. Requiere Docker en PATH y el contenedor kali-mcp corriendo. Arranca el server :8888 bajo demanda."
     }
   }
 }
