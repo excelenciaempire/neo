@@ -12,6 +12,8 @@ uno mantiene su propia licencia y autoría.
 | `hexstrike-ai/` | https://github.com/0x4m4/hexstrike-ai | Backend de ejecución avanzado (150+ tools, Python) | Ver repo |
 | `VulnForce/` | https://github.com/afsh4ck/VulnForce | **Motor de informes** (web-app Next.js + MCP nativo); 3er servicio Docker `:47474` | Ver repo |
 | `raptor/` | https://github.com/gadievron/raptor | **SAST + SCA/SBOM** (capa Python instalada en el contenedor kali-mcp) | Ver repo |
+| `bbot/` | https://github.com/blacklanternsecurity/bbot | **Escáner OSINT/ASM modular** (instalado aislado en kali-mcp `/opt/bbot-venv`) | GPL |
+| `linkedin2username/` | https://github.com/initstring/linkedin2username | Enum de empleados → **usernames para spraying** (en kali-mcp `/opt/linkedin2username`) | MIT |
 
 ## Re-clonar
 
@@ -38,3 +40,10 @@ Para levantar el backend de ejecución (Docker + kali-mcp), ver [`../execution/S
 - `afsh4ck/FBrute` — fuerza bruta de **cuentas de Facebook** de terceros; sin autorización posible.
 - `afsh4ck/WifiPwn` — incluye un **phishing-kit** ("Evil Portal" que clona logins de Google/Facebook/etc.);
   su núcleo WiFi legítimo ya está en `kali-mcp`. Se mantiene sin ejecutar, no se referencia en subagentes.
+
+## No integradas por **redundancia** (no por ética)
+
+- `laramies/theHarvester` — **ya está** en kali-mcp/hexstrike (ejecutable vía `execute_command`).
+- `devxprite/infoooze` — ~95-100% duplicado (sherlock/maigret/holehe/nmap/exiftool) + claves API muertas hardcodeadas.
+- `Lucksi/Mr.Holmes` — redundante + mal encaje técnico (TUI interactiva no scriptable, root, PHP/Tor/GUI). Solo referencia.
+- `lenso-ai/reverse-image-search-api` — SaaS de pago sin código self-hostable; **destilado** a `knowledge/osint/reverse-image-search-lenso.md`.

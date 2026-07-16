@@ -62,6 +62,26 @@ host, tecnologías/CMS, superficie expuesta (Shodan), correos/usuarios, y **posi
 priorizados para las siguientes fases (web-exploit / network-ad). Registra cada consulta/comando
 para el informe.
 
+## Herramientas OSINT avanzadas (instaladas en kali-mcp)
+- **bbot** — escáner OSINT/ASM modular y event-driven (consolida amass/subfinder/theHarvester/
+  spiderfoot en un solo grafo, +20-50% subdominios). Aislado en `/opt/bbot-venv`. Vía `execute_command`:
+  ```
+  /opt/bbot-venv/bin/bbot -t <dominio> -p subdomain-enum -rf passive   # SOLO pasivo (empieza aquí)
+  /opt/bbot-venv/bin/bbot -t <dominio> -p subdomain-enum               # subdominios (recursivo + NLP)
+  /opt/bbot-venv/bin/bbot -t <dominio> -p email-enum                   # emails
+  /opt/bbot-venv/bin/bbot -t <url>     -p web                          # web (ACTIVO)
+  ```
+  Salida JSON en `~/.bbot/scans/<name>/` (parseable por `reporting`/vulnforce). API keys en
+  `~/.config/bbot/bbot.yml`. Presets/módulos **ACTIVOS** (web, portscan, nuclei) y brute-force
+  (legba/medusa) **solo con autorización Full**.
+- **linkedin2username** (`/opt/linkedin2username`) — enumera empleados de una empresa y genera listas
+  de **usernames** (flast, f.last, first.last…) para user-enum/spraying. Usa la **cookie `li_at`** de
+  una cuenta LinkedIn **desechable** del operador (evita el login interactivo). **Solo en engagement
+  autorizado (Passive+Credentials o superior)**; el spraying lo ejecuta `network-ad`.
+- **Image-OSINT** (reverse image / face search) → ver `knowledge/osint/reverse-image-search-lenso.md`
+  (API Lenso + alternativas Google Lens/Yandex/TinEye por browser-harness). Face search de personas
+  **solo con consentimiento/autorización**.
+
 ## SCA / supply-chain — raptor
 Para auditar las **dependencias** de un proyecto **autorizado** (SBOM + CVEs de dependencias), usa
 **raptor** en el contenedor `kali-mcp` vía la tool MCP `execute_command`:

@@ -55,6 +55,11 @@ secretsdump.py DOMAIN/user:pass@dc-ip
 Si el MCP `kali` no está disponible, indícalo y guía la instalación (`execution/SETUP.md`);
 muchas de estas técnicas requieren el contenedor Kali o una VM Kali con acceso a la red objetivo.
 
+## Listas de usuarios para spraying
+Para el password spraying, `recon-osint` puede generar la lista de usuarios con **linkedin2username**
+(`/opt/linkedin2username`, empleados de la empresa → formatos flast/f.last/first.last). Úsala como
+`-u users.txt` con `crackmapexec`/`kerbrute`. Requiere autorización **Passive+Credentials** o superior.
+
 ## Reglas
 - No lances password spraying/brute force sin confirmar nivel "Passive + Credentials" o superior.
 - Nada de MITM/WiFi fuera de redes propias/autorizadas.

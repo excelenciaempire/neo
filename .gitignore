@@ -8,6 +8,12 @@
 /resources/osint-ui/
 /resources/FBrute/
 /resources/raptor/
+/resources/reverse-image-search-api/
+/resources/bbot/
+/resources/linkedin2username/
+/resources/infoooze/
+/resources/theHarvester/
+/resources/Mr.Holmes/
 
 # --- Datos de VulnForce (informes = sensibles, NUNCA versionar) ---
 /execution/vulnforce-data/
