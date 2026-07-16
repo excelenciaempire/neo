@@ -1,0 +1,25 @@
+# --- Repos de terceros clonados (re-clonar con resources/setup.ps1) ---
+/resources/WSTG-Scan/
+/resources/awesome-shodan-queries/
+/resources/kali-mcp/
+/resources/hexstrike-ai/
+
+# --- Secretos / credenciales (NUNCA subir) ---
+.env
+*.pem
+*.key
+*_token*
+*.creds
+secrets*.json
+
+# --- Datos de engagements/sesiones (pueden contener info sensible del cliente) ---
+/sessions/
+*.report.html
+
+# --- Artefactos y temporales ---
+**/__pycache__/
+**/*.venv/
+**/venv/
+node_modules/
+knowledge/_download.log
+knowledge/_download_failures.log
