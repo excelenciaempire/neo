@@ -78,9 +78,17 @@ para el informe.
   de **usernames** (flast, f.last, first.last…) para user-enum/spraying. Usa la **cookie `li_at`** de
   una cuenta LinkedIn **desechable** del operador (evita el login interactivo). **Solo en engagement
   autorizado (Passive+Credentials o superior)**; el spraying lo ejecuta `network-ad`.
-- **Image-OSINT** (reverse image / face search) → ver `knowledge/osint/reverse-image-search-lenso.md`
-  (API Lenso + alternativas Google Lens/Yandex/TinEye por browser-harness). Face search de personas
-  **solo con consentimiento/autorización**.
+- **image-recon** (tool propia de Neo, en `/opt/image-recon/image_recon.py`) — OSINT por imagen
+  ético/scoped. Vía `execute_command`:
+  ```
+  python3 /opt/image-recon/image_recon.py meta   <img>            # EXIF/GPS + pHash (maps_url si hay GPS)
+  python3 /opt/image-recon/image_recon.py search <url-img>        # URLs de busqueda inversa (Yandex/TinEye/Lens/Bing)
+  python3 /opt/image-recon/image_recon.py index  <dir> -o idx.json  # indexa corpus PROPIO/autorizado
+  python3 /opt/image-recon/image_recon.py match  <img> idx.json    # casi-duplicados en tu corpus
+  ```
+  Las URLs de `search` se abren con `browser-harness`. **No** hace reconocimiento facial contra
+  internet; el matching es solo contra tu corpus. Referencia de API de pago: `knowledge/osint/reverse-image-search-lenso.md`.
+  Face search de personas **solo con consentimiento/autorización**.
 
 ## SCA / supply-chain — raptor
 Para auditar las **dependencias** de un proyecto **autorizado** (SBOM + CVEs de dependencias), usa
