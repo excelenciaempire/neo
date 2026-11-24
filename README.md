@@ -6,7 +6,7 @@
 
 <p align="center">
   Del reconocimiento al informe, en un mismo entorno.<br>
-  Pentesting ético, OSINT y análisis de seguridad para Claude Code.
+  Pentesting ético, OSINT y análisis de seguridad asistidos por IA.
 </p>
 
 <p align="center">
@@ -72,7 +72,7 @@ Neo incluye una copia local de las **767 páginas** de la [Ethical Hacking Cheat
 | [`knowledge/pages/`](knowledge/pages/) | Páginas individuales con la jerarquía original. |
 | [`knowledge/osint/shodan-queries.md`](knowledge/osint/shodan-queries.md) | Consultas de Shodan para investigación autorizada. |
 
-La referencia se consulta localmente; Claude Code necesita su propia instalación y acceso al modelo.
+La referencia se consulta localmente; el análisis con IA requiere acceso a un modelo.
 
 ## Inicio rápido
 
@@ -83,9 +83,9 @@ git clone -c core.longpaths=true https://github.com/excelenciaempire/neo.git
 cd neo
 ```
 
-### 2. Abre Neo en Claude Code
+### 2. Carga los agentes
 
-Abre Claude Code desde la raíz de `neo/`. Allí están los cinco agentes, las instrucciones del proyecto y la base de conocimiento. **Docker no es necesario para planificar, consultar la referencia o redactar informes.**
+Consulta los cinco [perfiles de agentes](.claude/agents/) y la base de conocimiento desde tu entorno de IA. Si tu cliente utiliza otro formato de agentes, adapta los perfiles antes de cargarlos. **Docker no es necesario para planificar, consultar la referencia o redactar informes.**
 
 El OSINT en vivo requiere un navegador disponible y configurado; los agentes utilizan `browser-harness`.
 
@@ -104,13 +104,13 @@ bash resources/kali-mcp/init.sh
 bash execution/setup-hexstrike.sh
 ```
 
-Reinicia Claude Code para cargar las conexiones de [`.mcp.json`](.mcp.json). La [guía de ejecución](execution/SETUP.md) detalla los requisitos, la verificación y la instalación adicional de VulnForce y raptor.
+Configura las conexiones de [`.mcp.json`](.mcp.json) en tu cliente compatible con MCP. La [guía de ejecución](execution/SETUP.md) detalla los requisitos, la verificación y la instalación adicional de VulnForce y raptor.
 
 ### Elige qué necesitas activar
 
 | Componente | Para qué sirve | Requisito |
 | :--- | :--- | :--- |
-| **Agentes + conocimiento** | Planificación, metodología, consulta e informes. | Claude Code. |
+| **Agentes + conocimiento** | Planificación, metodología, consulta e informes. | Entorno de IA con los perfiles de agentes cargados. |
 | **OSINT en vivo** | Consultar fuentes públicas desde el navegador. | `browser-harness` configurado. |
 | **kali-mcp** | Ejecutar herramientas de seguridad en Kali. | Docker; endpoint local `:666/mcp`. |
 | **HexStrike AI** | Ampliar las herramientas de ejecución. | Contenedor `kali-mcp` y script de instalación; servidor interno `:8888`. |
