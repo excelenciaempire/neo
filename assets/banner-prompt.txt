@@ -1,0 +1,10 @@
+Generator: OpenAI built-in image_gen (no Kie AI).
+Use: README banner for excelenciaempire/neo.
+
+Use case: stylized-concept
+Asset type: final wide GitHub repository README banner for the real open-source project NEO, a Spanish ethical cybersecurity and OSINT AI-agent suite.
+Primary request: create a polished distinctive professional brand banner, landscape 3:1 composition, approximately 1800x600. A nearly black ink background, luminous emerald green and subtle cool mint. Restrained cinematic security-research aesthetic with editorial typography.
+Subject: at right, an original sculptural abstract letter N formed from two interwoven translucent dark glass ribbons with razor-sharp emerald illuminated edges; five tiny connected glowing nodes around it represent five specialized agents and a faint network map. Strong artistic visual with physical depth, elegant reflections and generous negative space. No people, hooded hackers, skulls, locks or shields.
+At left, very large crisp white custom geometric typography reading exactly "NEO". Below it, one clean small uppercase line reading exactly "ETHICAL SECURITY · POWERED BY AI". All type inside a generous 8% safe margin. Wordmark is the focus, subtitle secondary, abstract N occupies right half. Sparse faint green technical linework and small data particles, no fake interface windows.
+Text (verbatim): "NEO" and "ETHICAL SECURITY · POWERED BY AI". No other text.
+Constraints: premium professional cohesive art direction, excellent small-size legibility, restrained bloom, no watermarks, no badges, no vendor logos, no charts, no claims about results. Produce the actual final banner PNG.
